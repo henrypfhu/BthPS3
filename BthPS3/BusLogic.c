@@ -588,20 +588,14 @@ BthPS3_EvtWdfChildListCreateDevice(
 		// 
 
 		WDF_DEVICE_POWER_CAPABILITIES_INIT(&powerCaps);
-
 		powerCaps.DeviceD1 = WdfFalse;
-		powerCaps.DeviceD2 = WdfFalse;
-
-		powerCaps.WakeFromD0 = WdfFalse;
-		powerCaps.WakeFromD1 = WdfFalse;
-		powerCaps.WakeFromD2 = WdfFalse;
-		powerCaps.WakeFromD3 = WdfFalse;
-
+		powerCaps.DeviceD2 = WdfTrue;
+		powerCaps.WakeFromD2 = WdfTrue;
 		powerCaps.DeviceState[PowerSystemWorking] = PowerDeviceD0;
-		powerCaps.DeviceState[PowerSystemSleeping1] = PowerDeviceD3;
-		powerCaps.DeviceState[PowerSystemSleeping2] = PowerDeviceD3;
-		powerCaps.DeviceState[PowerSystemSleeping3] = PowerDeviceD3;
-		powerCaps.DeviceState[PowerSystemHibernate] = PowerDeviceD3;
+		powerCaps.DeviceState[PowerSystemSleeping1] = PowerDeviceD2;
+		powerCaps.DeviceState[PowerSystemSleeping2] = PowerDeviceD2;
+		powerCaps.DeviceState[PowerSystemSleeping3] = PowerDeviceD2;
+		powerCaps.DeviceState[PowerSystemHibernate] = PowerDeviceD2;
 		powerCaps.DeviceState[PowerSystemShutdown] = PowerDeviceD3;
 
 		WdfDeviceSetPowerCapabilities(hChild, &powerCaps);
